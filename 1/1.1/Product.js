@@ -1,63 +1,42 @@
 function Product(id, name, description, price, brand, activeSize, quantity, date) {
 
     switch (typeof id) {
-        case "string":
-            this.ID = id;
-            break;
-        default:
-            this.ID = null;
+        case "string": this.ID = id;
+        default: this.ID = null;
     }
 
     switch (typeof name) {
-        case "string":
-            this.name = name;
-            break;
-        default:
-            this.name = null;
+        case "string": this.name = name
+        default: this.name = null;
     }
 
     switch (typeof description) {
-        case "string":
-            this.description = description;
-            break;
-        default:
-            this.description = null;
+        case "string": this.description = description;
+        default: this.description = null;
     }
 
 
     switch (typeof price) {
-        case "number":
-            this.price = price;
-            break;
-        default:
-            this.price = null;
+        case "number": this.price = price;
+        default: this.price = null;
     }
 
     switch (typeof brand) {
-        case "string":
-            this.brand = brand;
-            break;
-        default:
-            this.brand = null;
+        case "string": this.brand = brand;
+        default: this.brand = null;
     }
 
 
     this.sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
     switch (typeof activeSize) {
-        case "string":
-            this.activeSize = activeSize;
-            break;
-        default:
-            this.activeSize = null;
+        case "string": this.activeSize = activeSize;
+        default: this.activeSize = null;
     }
 
     switch (typeof quantity) {
-        case "number":
-            this.quantity = quantity;
-            break;
-        default:
-            this.quantity = null;
+        case "number": this.quantity = quantity;
+        default: this.quantity = null;
     }
 
     if (date instanceof Date) {
