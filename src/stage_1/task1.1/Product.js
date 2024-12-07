@@ -1,49 +1,26 @@
-function Product(id, name, description, price, brand, activeSize, quantity, date) {
-
-    switch (typeof id) {
-        case "string": this.ID = id;
-        default: this.ID = null;
-    }
-
-    switch (typeof name) {
-        case "string": this.name = name
-        default: this.name = null;
-    }
-
-    switch (typeof description) {
-        case "string": this.description = description;
-        default: this.description = null;
-    }
-
-
-    switch (typeof price) {
-        case "number": this.price = price;
-        default: this.price = null;
-    }
-
-    switch (typeof brand) {
-        case "string": this.brand = brand;
-        default: this.brand = null;
-    }
-
+/**
+ * 
+ * @param {string} id 
+ * @param {string} name 
+ * @param {string} description 
+ * @param {number} price 
+ * @param {string} brand 
+ * @param {string} activeSize 
+ * @param {number} quantity 
+ */
+export function Product(id, name, description, price, brand, activeSize, quantity) {
+    this.ID = typeof id === "string" ? id : null;
+    this.name = typeof name === "string" ? name : null;
+    this.description = typeof description === "string" ? description : null;
+    this.price = typeof price === "number" ? price : 0;
+    this.brand = typeof brand === "string" ? brand : null;
 
     this.sizes = ["XS", "S", "M", "L", "XL", "XXL"];
 
-    switch (typeof activeSize) {
-        case "string": this.activeSize = activeSize;
-        default: this.activeSize = null;
-    }
+    this.activeSize = typeof activeSize === "string" ? activeSize : null;
+    this.quantity = typeof quantity === "number" ? quantity : 0;
 
-    switch (typeof quantity) {
-        case "number": this.quantity = quantity;
-        default: this.quantity = null;
-    }
-
-    if (date instanceof Date) {
-        this.date = date;
-    } else {
-        this.date = null;
-    }
+    this.date = new Date;
 
     this.reviews = [];
 
@@ -68,18 +45,20 @@ function Product(id, name, description, price, brand, activeSize, quantity, date
     this.setName = function (newName) {
         switch (typeof newName) {
             case "string": this.name = newName;
+                break;
             default: console.log("Name has not bee change");
         }
     }
 
 
-    this.getDescriptoion = function () {
+    this.getDescription = function () {
         return this.description;
     }
 
     this.setDescription = function (newDescripton) {
         switch (typeof newDescripton) {
             case "string": this.description = newDescripton;
+                break;
             default: console.log("Description has not bee change");
         }
     }
@@ -91,6 +70,7 @@ function Product(id, name, description, price, brand, activeSize, quantity, date
     this.setPrice = function (newPrice) {
         switch (typeof newPrice) {
             case "number": this.price = newPrice;
+                break;
             default: console.log("Price has not bee change");
         }
     }
@@ -102,6 +82,7 @@ function Product(id, name, description, price, brand, activeSize, quantity, date
     this.setBrand = function (newBrand) {
         switch (typeof newBrand) {
             case "string": this.brand = newBrand;
+                break;
             default: console.log("Brand has not bee change");
         }
     }
@@ -113,6 +94,7 @@ function Product(id, name, description, price, brand, activeSize, quantity, date
     this.setSize = function (newSize) {
         switch (typeof newSize) {
             case "string": this.sizes.push(newSize);
+                break;
             default: console.log("New size not added");
         }
     }
@@ -133,7 +115,8 @@ function Product(id, name, description, price, brand, activeSize, quantity, date
 
     this.setQuantity = function (newQuantity) {
         switch (typeof newQuantity) {
-            case "string": this.quantity = newQuantity;
+            case "number": this.quantity = newQuantity;
+                break;
             default: console.log("Quantity has not bee change");
         }
     }
@@ -142,21 +125,17 @@ function Product(id, name, description, price, brand, activeSize, quantity, date
         return this.date;
     }
 
-    this.setDate = function (newDate) {
-        if (newDate instanceof Date) {
-            this.date = newDate;
-        } else {
-            console.log("Date has not bee change");
-        }
+    this.setDate = function () {
+        this.date = new Date;
     }
 
     this.getReviews = function () {
         return this.reviews;
     }
 
-    this.setReview = function (Review) {
-        if (review instanceof Review) {
-            this.reviews.push(Review);
+    this.setReview = function (newReview) {
+        if (newReview instanceof Review) {
+            this.reviews.push(newReview);
         } else {
             console.log("No review added.");
         }
@@ -169,12 +148,17 @@ function Product(id, name, description, price, brand, activeSize, quantity, date
     this.setImage = function (image) {
         switch (typeof image) {
             case "string": this.images.push(image);
+                break;
             default: console.log("No image added.")
         }
     }
 }
 
-function Review(ID, author, date, coment, rating) {
+function Review(id, author, coment, rating) {
+    this.ID = typeof id === "string" ? id : null;
+    this.author = typeof author === "string" ? author : "unknown author";
 
+    this.date = new Date;
+    this.coment = typeof coment === "string" ? coment : "...";
 }
 
