@@ -1,12 +1,17 @@
 /**
- * 
- * @param {string} id 
- * @param {string} name 
- * @param {string} description 
- * @param {number} price 
- * @param {string} brand 
- * @param {string} activeSize 
- * @param {number} quantity 
+ * A constructor function that creates Product objects. 
+ * Product objects contain information about an individual product.
+ * Internal fields date, reviews, images are created when the function is called.
+ * data - product creation date
+ * reviews - array containing customer reviews
+ * images - array containing a product photo
+ * @param {string} id - product id. must be a unique value
+ * @param {string} name - product name
+ * @param {string} description - product description
+ * @param {number} price - product price
+ * @param {string} brand - product brand
+ * @param {string} activeSize - available product sizes
+ * @param {number} quantity - available quantity of product
  */
 export function Product(id, name, description, price, brand, activeSize, quantity) {
     this.ID = typeof id === "string" ? id : null;
