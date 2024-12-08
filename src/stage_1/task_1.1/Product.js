@@ -1,3 +1,4 @@
+import { Review } from "./Review.js";
 /**
  * A constructor function that creates Product objects. 
  * Product objects contain information about an individual product.
@@ -36,7 +37,7 @@ export function Product(id, name, description, price, brand, activeSize, quantit
     }
 
     this.setId = function (id) {
-        if (this.ID === null && this.ID === undefined) {
+        if (this.ID === null || this.ID === undefined) {
             this.ID = id;
         } else {
             console.log("This object already has an ID. ID is " + this.ID);
@@ -96,11 +97,9 @@ export function Product(id, name, description, price, brand, activeSize, quantit
         return this.sizes;
     }
 
-    this.setSize = function (newSize) {
-        switch (typeof newSize) {
-            case "string": this.sizes.push(newSize);
-                break;
-            default: console.log("New size not added");
+    this.setSizes = function (newSizes) {
+        if (newSizes instanceof Array) {
+            this.sizes = newSizes
         }
     }
 
@@ -111,6 +110,8 @@ export function Product(id, name, description, price, brand, activeSize, quantit
     this.setActiveSize = function (newActiveSize) {
         switch (typeof newActiveSize) {
             case "string": this.activeSize = newActiveSize;
+                break;
+            default: console.log("New active size not added");
         }
     }
 
@@ -138,11 +139,9 @@ export function Product(id, name, description, price, brand, activeSize, quantit
         return this.reviews;
     }
 
-    this.setReview = function (newReview) {
-        if (newReview instanceof Review) {
-            this.reviews.push(newReview);
-        } else {
-            console.log("No review added.");
+    this.setReviews = function (newReviews) {
+        if (newReviews instanceof Array) {
+            this.reviews = newReviews;
         }
     }
 
@@ -150,20 +149,97 @@ export function Product(id, name, description, price, brand, activeSize, quantit
         return this.images;
     }
 
-    this.setImage = function (image) {
-        switch (typeof image) {
-            case "string": this.images.push(image);
-                break;
-            default: console.log("No image added.")
+    this.setImage = function (newImages) {
+        if (newImages instanceof Array) {
+            this.images = newImages;
         }
     }
-}
+    /**
+     * Searches for a response based on the input parameter and returns it if found
+     * @param {string} id 
+     * @returns - review from a review array
+     */
+    this.getReviewById = function (id) {
+        if (typeof id !== "string") {
+            return null;
+        }
+        for (let i = 0; i < this.reviews.length; i++) {
+            if (this.reviews[i].ID === id) {
+                return this.reviews[i];
+            }
+        }
+        return null;
+    }
 
-function Review(id, author, coment, rating) {
-    this.ID = typeof id === "string" ? id : null;
-    this.author = typeof author === "string" ? author : "unknown author";
+    /**
+     * Returns "image" from the images field
+     * @param {string} - param 
+     * @returns  - if the parameter is specified when the function is called it will return the corresponding image,
+     *             if no corresponding image is found it will return the first image
+     *           - if no parameter is specified when calling the function, it returns the first "image" from the array
+     * if the array is empty returns undefined :(
+     */
+    this.getImage = function (param) {
+        if (param !== undefined) {
+            for (let i = 0; i < this.images.length; i++) {
+                if (this.images[i] === param) {
+                    return this.images[i];
+                } else {
+                    return this.images[0];
+                }
+            }
+        }
+        return this.image[0];
+    }
 
-    this.date = new Date;
-    this.coment = typeof coment === "string" ? coment : "...";
+    /**
+     * The method adds a new dimension to the dimensions array.
+     * @param {string} newSize
+     */
+    this.addSize = function (newSize) {
+        switch (typeof newSize) {
+            case "string": this.sizes.push(newSize);
+                break;
+            default: console.log("New size not added");
+        }
+    }
+
+    /**
+     * The method removes values ​​from an array of dimensions.
+     * @param {string} size - size value to be deleted
+     */
+    this.deleteSize = function (size) {
+        if (typeof size !== "string") {
+            return;
+        }
+        for (let i = 0; i < this.sizes.length; i++) {
+            if (this.sizes[i] === size) {
+                this.sizes.splice(i, 1);
+            }
+        }
+    }
+
+    /**
+     * The method adds a new review to the reviews array.
+     * @param {Review} newReview
+     */
+    this.addReview = function (newReview) {
+        if (newReview instanceof Review) {
+            this.reviews.push(newReview);
+        } else {
+            console.log("New rewiew not added");
+        }
+    }
+    /**
+     * The method deletes the review by its ID.
+     * @param {string} id - the id of the review to be deleted
+     */
+    this.deleteReview = function (id) {
+        for (let i = 0; i < this.reviews.length; i++) {
+            if (this.reviews[i].ID === id) {
+                this.reviews.splice(i, 1);
+            }
+        }
+    }
 }
 
