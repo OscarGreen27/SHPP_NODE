@@ -241,5 +241,52 @@ export function Product(id, name, description, price, brand, activeSize, quantit
             }
         }
     }
+
+
 }
 
+/**
+ * The function searches for Product objects in an array. 
+ * The search is performed in the fields with the description and name.
+ * @param {Array} products - an array of Product objects in which you want to find elements that match the search key
+ * @param {String} search - search key
+ * @returns - an array of objects whose description or name contains the search key
+ */
+export function searchProducts(products, search) {
+    let result = [];
+    if (!products instanceof Array || typeof sortRule !== "string") {
+        return result;
+    }
+
+    let regExp = new RegExp(search.replace("*", ".*"), "i");
+
+    result = products.filter(product => regExp.test(product.name) || regExp.test(product.description));
+
+    return result;
+}
+
+/**
+ * The function sorts an array of Product objects using the array method sort().
+ * The sort() method is passed an arrow function that works with the method arguments
+ *  and sorts the array depending on the sortRule parameter.
+ * @param {Array} products - array of objects Product
+ * @param {string} search - field of the Product object by which the array is sorted (ID, name, price)
+ * @returns sorted array, if the input parameters are invalid, an empty array will be returned
+ */
+export function sortProducts(products, sortRule) {
+    let result = [];
+    if (!products instanceof Array || typeof sortRule !== "string") {
+        return result;
+    }
+
+    result = products.sort((a, b) => {
+        if (sortRule === "price") {
+            return a[sortRule] - b[sortRule];
+        } else if (sortRule === "ID" || sortRule === "name") {
+            return a[sortRule].localeCompare(b[sortRule]);
+        } else {
+            return 0;
+        }
+    });
+    return result;
+}
