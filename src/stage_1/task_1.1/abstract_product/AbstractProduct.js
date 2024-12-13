@@ -113,11 +113,13 @@ AbstractProduct.prototype.getPriceForQuantity = function (number) {
     return `$${this.price * number}`;
 }
 
-AbstractProduct.prototype.getteOrSetter = function (action, field, value) {
+AbstractProduct.prototype.getOrSett = function (action, field, value) {
     if (action === "get") {
         return this[field]
-    } else if (action === "set") {
+    } else if (action === "set" && value !== undefined) {
         this[field] = value;
+    }else{
+        console.log("Check the parameters");
     }
 }
 
