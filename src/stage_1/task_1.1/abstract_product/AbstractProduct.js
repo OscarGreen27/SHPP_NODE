@@ -106,7 +106,7 @@ AbstaractProduct.prototype.swtImages = function (newImages) {
 AbstaractProduct.prototype.getFullInformation = function () {
     return `ID: ${this.IDx}\nName: ${this.name}\nDescription: ${this.description}\nPrice: ${this.price}\n
         Quantity: ${this.quantity}\nBrand ${this.brand}\nQuantity: ${this.quantity}\nDate: ${this.date}\n
-        Reviews: ${this.reviews.join(", ")}\nImages ${this.images.join(", ")}`;
+        Reviews: ${this.reviews.join(", ")}\nImages: ${this.images.join(", ")}`;
 }
 
 AbstaractProduct.prototype.getPriceForQuantity = function (number) {
@@ -130,6 +130,10 @@ function Clothes(id, name, description, price, quantity, material, color) {
 }
 
 Clothers.prototype = Object.create(AbstaractProduct.prototype);
+
+Clothers.prototype.getFullInformation = function(){
+  return  AbstaractProduct.prototype.getFullInformation.call(this) + `Material: ${this.material}\nColor: ${this.color}`;
+}
 
 Clothers.prototype.getMaterial = function () {
     return this.material;
@@ -162,6 +166,10 @@ function Electronics(id, name, description, price, quantity, warranty, power) {
     this.power = typeof power === "number" ? power : null;
 }
 Electronics.prototype = Object.create(AbstaractProduct.prototype);
+
+Electronics.prototype.getFullInformation = function(){
+    return AbstaractProduct.prototype.getFullInformation.call(this) + `Warranty: ${this.warranty}\nPower: ${this.power}`;
+}
 
 Electronics.prototype.getWarranty = function () {
     return this.materiall
