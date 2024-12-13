@@ -1,4 +1,3 @@
-import { Review } from "./Review.js";
 /**
  * A constructor function that creates Product objects. 
  * Product objects contain information about an individual product.
