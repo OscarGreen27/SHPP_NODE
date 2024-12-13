@@ -1,4 +1,4 @@
-function AbstaractProduct(id, name, description, price, quantity) {
+function AbstractProduct(id, name, description, price, brand, quantity) {
     this.ID = typeof id === "string" ? id : null;
     this.name = typeof name === "string" ? name : null;
     this.description = typeof description === "string" ? description : null;
@@ -13,10 +13,10 @@ function AbstaractProduct(id, name, description, price, quantity) {
     this.images = [];
 }
 
-AbstaractProduct.prototype.getId = function () {
+AbstractProduct.prototype.getId = function () {
     return this.ID;
 }
-AbstaractProduct.prototype.setId = function (newId) {
+AbstractProduct.prototype.setId = function (newId) {
     if (this.ID === null || this.ID === undefined) {
         this.ID = newId;
     } else {
@@ -24,10 +24,10 @@ AbstaractProduct.prototype.setId = function (newId) {
     }
 }
 
-AbstaractProduct.prototype.getName = function () {
+AbstractProduct.prototype.getName = function () {
     return this.name
 }
-AbstaractProduct.prototype.setName = function (newName) {
+AbstractProduct.prototype.setName = function (newName) {
     switch (typeof newName) {
         case "string": this.name = newName;
             break;
@@ -35,10 +35,10 @@ AbstaractProduct.prototype.setName = function (newName) {
     }
 }
 
-AbstaractProduct.prototype.getDescription = function () {
+AbstractProduct.prototype.getDescription = function () {
     return this.description;
 }
-AbstaractProduct.prototype.setDescription = function (newDescripton) {
+AbstractProduct.prototype.setDescription = function (newDescripton) {
     switch (typeof newDescripton) {
         case "string": this.description = newDescripton;
             break;
@@ -46,21 +46,21 @@ AbstaractProduct.prototype.setDescription = function (newDescripton) {
     }
 }
 
-AbstaractProduct.prototype.getPrice = function () {
+AbstractProduct.prototype.getPrice = function () {
     return this.price;
 }
-AbstaractProduct.prototype.setPrice = function (newPrice) {
+AbstractProduct.prototype.setPrice = function (newPrice) {
     switch (typeof newPrice) {
-        case "string": this.price = newPrice;
+        case "number": this.price = newPrice;
             break;
         default: console.log("Description has not bee change");
     }
 }
 
-AbstaractProduct.prototype.getBrand = function () {
+AbstractProduct.prototype.getBrand = function () {
     return this.brand;
 }
-AbstaractProduct.prototype.setBrand = function (newBrand) {
+AbstractProduct.prototype.setBrand = function (newBrand) {
     switch (typeof newBrand) {
         case "string": this.brand = newBrand;
             break;
@@ -68,10 +68,10 @@ AbstaractProduct.prototype.setBrand = function (newBrand) {
     }
 }
 
-AbstaractProduct.prototype.getQuantity = function () {
+AbstractProduct.prototype.getQuantity = function () {
     return this.quantity;
 }
-AbstaractProduct.prototype.setQuantity = function (newQuantity) {
+AbstractProduct.prototype.setQuantity = function (newQuantity) {
     switch (typeof newQuantity) {
         case "number": this.quantity = newQuantity;
             break;
@@ -79,66 +79,66 @@ AbstaractProduct.prototype.setQuantity = function (newQuantity) {
     }
 }
 
-AbstaractProduct.prototype.getDate = function () {
+AbstractProduct.prototype.getDate = function () {
     return this.Date;
 }
-AbstaractProduct.prototype.setDate = function () {
+AbstractProduct.prototype.setDate = function () {
     this.date = new Date;
 }
 
-AbstaractProduct.prototype.getReviews = function () {
+AbstractProduct.prototype.getReviews = function () {
     return this.reviews;
 }
-AbstaractProduct.prototype.setReviews = function (newRewiews) {
+AbstractProduct.prototype.setReviews = function (newRewiews) {
     if (newRewiews instanceof Array) {
-        this.images = newRewiews;
+        this.reviews = newRewiews;
     }
 }
-AbstaractProduct.prototype.getImages = function () {
+AbstractProduct.prototype.getImages = function () {
     return this.images;
 }
-AbstaractProduct.prototype.swtImages = function (newImages) {
+AbstractProduct.prototype.swtImages = function (newImages) {
     if (newImages instanceof Array) {
         this.images = newImages;
     }
 }
 
-AbstaractProduct.prototype.getFullInformation = function () {
-    return `ID: ${this.IDx}\nName: ${this.name}\nDescription: ${this.description}\nPrice: ${this.price}\n
+AbstractProduct.prototype.getFullInformation = function () {
+    return `ID: ${this.ID}\nName: ${this.name}\nDescription: ${this.description}\nPrice: ${this.price}\n
         Quantity: ${this.quantity}\nBrand ${this.brand}\nQuantity: ${this.quantity}\nDate: ${this.date}\n
         Reviews: ${this.reviews.join(", ")}\nImages: ${this.images.join(", ")}`;
 }
 
-AbstaractProduct.prototype.getPriceForQuantity = function (number) {
+AbstractProduct.prototype.getPriceForQuantity = function (number) {
     return `$${this.price * number}`;
 }
 
-AbstaractProduct.prototype.getteOrSetter = function (action, field, value) {
+AbstractProduct.prototype.getteOrSetter = function (action, field, value) {
     if (action === "get") {
         return this[field]
-    }else if(action === "set"){
+    } else if (action === "set") {
         this[field] = value;
     }
 }
 
 
 function Clothes(id, name, description, price, quantity, material, color) {
-    AbstaractProduct.call(this, id, name, description, price, quantity);
+    AbstractProduct.call(this, id, name, description, price, quantity);
 
     this.material = typeof material === "string" ? material : null;
     this.color = typeof color === "string" ? color : null;
 }
 
-Clothers.prototype = Object.create(AbstaractProduct.prototype);
+Clothes.prototype = Object.create(AbstaractProduct.prototype);
 
-Clothers.prototype.getFullInformation = function(){
-  return  AbstaractProduct.prototype.getFullInformation.call(this) + `Material: ${this.material}\nColor: ${this.color}`;
+Clothes.prototype.getFullInformation = function () {
+    return AbstractProduct.prototype.getFullInformation.call(this) + `Material: ${this.material}\nColor: ${this.color}`;
 }
 
-Clothers.prototype.getMaterial = function () {
+Clothes.prototype.getMaterial = function () {
     return this.material;
 }
-Clothers.prototype.setMaterial = function (newMaterial) {
+Clothes.prototype.setMaterial = function (newMaterial) {
     switch (typeof newMaterial) {
         case "string": this.material = newMaterial;
             break;
@@ -146,10 +146,10 @@ Clothers.prototype.setMaterial = function (newMaterial) {
     }
 }
 
-Clothers.prototype.getColor = function () {
+Clothes.prototype.getColor = function () {
     return this.color;
 }
-Clothers.prototype.setColor = function (newColor) {
+Clothes.prototype.setColor = function (newColor) {
     switch (typeof newColor) {
         case "string": this.color = newColor;
             break;
@@ -160,19 +160,19 @@ Clothers.prototype.setColor = function (newColor) {
 
 
 function Electronics(id, name, description, price, quantity, warranty, power) {
-    AbstaractProduct.call(this, id, name, description, price, quantity);
+    AbstractProduct.call(this, id, name, description, price, quantity);
 
     this.warranty = typeof warranty === "number" ? warranty : null;
     this.power = typeof power === "number" ? power : null;
 }
 Electronics.prototype = Object.create(AbstaractProduct.prototype);
 
-Electronics.prototype.getFullInformation = function(){
-    return AbstaractProduct.prototype.getFullInformation.call(this) + `Warranty: ${this.warranty}\nPower: ${this.power}`;
+Electronics.prototype.getFullInformation = function () {
+    return AbstractProduct.prototype.getFullInformation.call(this) + `Warranty: ${this.warranty}\nPower: ${this.power}`;
 }
 
 Electronics.prototype.getWarranty = function () {
-    return this.materiall
+    return this.warranty;
 }
 Electronics.prototype.setWarranty = function (newWarranty) {
     switch (typeof newWarranty) {
