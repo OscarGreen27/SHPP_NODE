@@ -253,7 +253,7 @@ export function Product(id, name, description, price, brand, activeSize, quantit
  */
 export function searchProducts(products, search) {
     let result = [];
-    if (!products instanceof Array || typeof sortRule !== "string") {
+    if (!(products instanceof Array) || typeof search !== "string") {
         return result;
     }
 
@@ -274,7 +274,7 @@ export function searchProducts(products, search) {
  */
 export function sortProducts(products, sortRule) {
     let result = [];
-    if (!products instanceof Array || typeof sortRule !== "string") {
+    if (!(products instanceof Array) || typeof sortRule !== "string") {
         return result;
     }
 
